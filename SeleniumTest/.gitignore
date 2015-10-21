@@ -1,3 +1,4 @@
+my-app/target/*
 bin/*
 .settings/*
 .project
