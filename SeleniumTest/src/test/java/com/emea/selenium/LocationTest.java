@@ -3,6 +3,7 @@ package com.emea.selenium;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 
 public class LocationTest {
@@ -22,7 +25,7 @@ public class LocationTest {
   private StringBuffer verificationErrors = new StringBuffer();
 
   public enum Roma{
-	  LOCATION1("Rome Fiumicino Airport"),
+	  LOCATION1("Rome Ciampino Airport"),
 	  LOCATION2("Rome"),
 	  LOCATION3("Rome Via Veneto");
 	  
@@ -51,7 +54,11 @@ public class LocationTest {
   
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
+    FirefoxProfile firefoxProfile = new FirefoxProfile(); 
+    driver = 
+    new FirefoxDriver(
+      new FirefoxBinary(
+        new File("/usr/bin/firefox")), firefoxProfile);
     baseUrl = "https://isobar:wunderland@stage2-www-ehil.ctmsp.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().window().maximize();
